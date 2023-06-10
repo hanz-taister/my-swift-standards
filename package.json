@@ -3,8 +3,10 @@
   "displayName": "My Swift Standards",
   "description": "",
   "version": "0.0.1",
+  "repository": "https://github.com/hanz-taister/my-swift-standards",
+  "publisher": "Taister",
   "engines": {
-    "vscode": "^1.79.0"
+    "vscode": "^1.78.2"
   },
   "categories": [
     "Programming Languages"
