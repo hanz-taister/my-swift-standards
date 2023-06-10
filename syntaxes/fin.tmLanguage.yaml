@@ -1,0 +1,312 @@
+# npx js-yaml syntaxes/fin.tmLanguage.yaml > syntaxes/fin.tmLanguage.json
+$schema: https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json
+name: Fin
+patterns:
+  - include: '#basic-header-block'
+  - include: '#application-header-block'
+  - include: '#user-header-block'
+  - include: '#text-block'
+  - include: '#trailer-block'
+  - include: '#theme-token-colors'
+repository:
+  basic-header-block:
+    begin: '{1:'
+    end: '}'
+  application-header-block:
+    begin: '{2:'
+    end: '}'
+    patterns:
+      - include: '#output-message'
+      - include: '#input-message'
+  user-header-block:
+    begin: '{3:'
+    end: '}'
+  text-block:
+    begin: '{4:'
+    end: '-}'
+    patterns:
+      - include: '#swift-session'
+      - include: '#swift-object'
+      - include: '#swift-variable'
+      - include: '#swift-constant'
+  trailer-block:
+    begin: '{5:'
+    end: '}'
+  output-message:
+    begin: 'O(\d{3})(\d{4})(\d{6})(\w{12})(\w{10})(\d{6})(\d{4})'
+    end: 'N'
+    beginCaptures:
+      1: 
+        name: string.regexp.fin
+      4: 
+        name: markup.underline.fin
+      6: 
+        name: markup.underline.fin
+      7: 
+        name: markup.underline.fin
+  input-message:
+    begin: 'I(\d{3})(\w{12})(.{2})'
+    end: '003|020'
+    beginCaptures:
+      1: 
+        name: string.regexp.fin
+      2: 
+        name: markup.underline.fin
+  swift-session:
+    begin: '^(:)(16R|16S)(:)(\w+)'
+    end: '$'
+    beginCaptures:
+      1: 
+        name: markup.italic.fin
+      2: 
+        name: markup.italic.fin
+      3: 
+        name: markup.italic.fin
+      4: 
+        name: markup.italic.fin
+  swift-constant:
+    begin: '^:(\w+):(.+)'
+    end: '$'
+    beginCaptures:
+      1: 
+        name: markup.heading.fin
+      2: 
+        name: markup.bold.fin
+  swift-variable:
+    begin: '^:(\w+)::(\w+)(//|/)(.+)'
+    end: '$'
+    beginCaptures:
+      1: 
+        name: markup.heading.fin
+      2: 
+        name: markup.bold.fin
+      4: 
+        name: string.value.fin
+  swift-object:
+    begin: '^:(\w+)::(\w+)(//|/)(\w+)/(.+)'
+    end: '$'
+    beginCaptures:
+      1: 
+        name: markup.heading.fin
+      2: 
+        name: markup.bold.fin
+      4: 
+        name: markup.bold.fin
+      5: 
+        name: string.value.fin
+# ---------- ---------- ----------
+  theme-token-colors:
+    begin: '--- theme-token-colors start ---'
+    end: '--- theme-token-colors end ---'
+    patterns:
+      - include: '#emphasis'
+      - include: '#strong'
+      - include: '#header'
+      - include: '#comment'
+      - include: '#constant.language'
+      - include: '#constant.regexp'
+      - include: '#entity.name.tag'
+      - include: '#entity.name.tag.css'
+      - include: '#entity.other.attribute-name'
+      - include: '#invalid'
+      - include: '#markup.underline'
+      - include: '#markup.bold'
+      - include: '#markup.heading'
+      - include: '#markup.italic'
+      - include: '#markup.strikethrough'
+      - include: '#markup.inserted'
+      - include: '#markup.deleted'
+      - include: '#markup.changed'
+      - include: '#punctuation.definition.quote.begin.markdown'
+      - include: '#punctuation.definition.list.begin.markdown'
+      - include: '#markup.inline.raw'
+      - include: '#punctuation.definition.tag'
+      - include: '#meta.preprocessor.string'
+      - include: '#meta.preprocessor.numeric'
+      - include: '#meta.structure.dictionary.key.python'
+      - include: '#meta.diff.header'
+      - include: '#storage'
+      - include: '#storage.type'
+      - include: '#string.tag'
+      - include: '#string.value'
+      - include: '#string.regexp'
+      - include: '#keyword'
+      - include: '#keyword.control'
+      - include: '#keyword.operator'
+      - include: '#keyword.other.unit'
+      - include: '#support.function.git-rebase'
+      - include: '#constant.sha.git-rebase'
+      - include: '#variable.language'
+      - include: '#token.info-token'
+      - include: '#token.warn-token'
+      - include: '#token.error-token'
+      - include: '#token.debug-token'
+  emphasis:
+    patterns:
+      - name: emphasis
+        match: \b(emphasis)\b
+  strong:
+    patterns:
+      - name: strong
+        match: \b(strong)\b
+  header:
+    patterns:
+      - name: header
+        match: \b(header)\b
+  comment:
+    patterns:
+      - name: comment
+        match: \b(comment)\b
+  constant.language:
+    patterns:
+      - name: constant.language
+        match: \b(constant.language)\b
+  constant.regexp:
+    patterns:
+      - name: constant.regexp
+        match: \b(constant.regexp)\b
+  entity.name.tag:
+    patterns:
+      - name: entity.name.tag
+        match: \b(entity.name.tag)\b
+  entity.name.tag.css:
+    patterns:
+      - name: entity.name.tag.css
+        match: \b(entity.name.tag.css)\b
+  entity.other.attribute-name:
+    patterns:
+      - name: entity.other.attribute-name
+        match: \b(entity.other.attribute-name)\b
+  invalid:
+    patterns:
+      - name: invalid
+        match: \b(invalid)\b
+  markup.underline:
+    patterns:
+      - name: markup.underline
+        match: \b(markup.underline)\b
+  markup.bold:
+    patterns:
+      - name: markup.bold
+        match: \b(markup.bold)\b
+  markup.heading:
+    patterns:
+      - name: markup.heading
+        match: \b(markup.heading)\b
+  markup.italic:
+    patterns:
+      - name: markup.italic
+        match: \b(markup.italic)\b
+  markup.strikethrough:
+    patterns:
+      - name: markup.strikethrough
+        match: \b(markup.strikethrough)\b
+  markup.inserted:
+    patterns:
+      - name: markup.inserted
+        match: \b(markup.inserted)\b
+  markup.deleted:
+    patterns:
+      - name: markup.deleted
+        match: \b(markup.deleted)\b
+  markup.changed:
+    patterns:
+      - name: markup.changed
+        match: \b(markup.changed)\b
+  punctuation.definition.quote.begin.markdown:
+    patterns:
+      - name: punctuation.definition.quote.begin.markdown
+        match: \b(punctuation.definition.quote.begin.markdown)\b
+  punctuation.definition.list.begin.markdown:
+    patterns:
+      - name: punctuation.definition.list.begin.markdown
+        match: \b(punctuation.definition.list.begin.markdown)\b
+  markup.inline.raw:
+    patterns:
+      - name: markup.inline.raw
+        match: \b(markup.inline.raw)\b
+  punctuation.definition.tag:
+    patterns:
+      - name: punctuation.definition.tag
+        match: \b(punctuation.definition.tag)\b
+  meta.preprocessor.string:
+    patterns:
+      - name: meta.preprocessor.string
+        match: \b(meta.preprocessor.string)\b
+  meta.preprocessor.numeric:
+    patterns:
+      - name: meta.preprocessor.numeric
+        match: \b(meta.preprocessor.numeric)\b
+  meta.structure.dictionary.key.python:
+    patterns:
+      - name: meta.structure.dictionary.key.python
+        match: \b(meta.structure.dictionary.key.python)\b
+  meta.diff.header:
+    patterns:
+      - name: meta.diff.header
+        match: \b(meta.diff.header)\b
+  storage:
+    patterns:
+      - name: storage
+        match: \b(storage)\b
+  storage.type:
+    patterns:
+      - name: storage.type
+        match: \b(storage.type)\b
+  string.tag:
+    patterns:
+      - name: string.tag
+        match: \b(string.tag)\b
+  string.value:
+    patterns:
+      - name: string.value
+        match: \b(string.value)\b
+  string.regexp:
+    patterns:
+      - name: string.regexp
+        match: \b(string.regexp)\b
+  keyword:
+    patterns:
+      - name: keyword
+        match: \b(keyword)\b
+  keyword.control:
+    patterns:
+      - name: keyword.control
+        match: \b(keyword.control)\b
+  keyword.operator:
+    patterns:
+      - name: keyword.operator
+        match: \b(keyword.operator)\b
+  keyword.other.unit:
+    patterns:
+      - name: keyword.other.unit
+        match: \b(keyword.other.unit)\b
+  support.function.git-rebase:
+    patterns:
+      - name: support.function.git-rebase
+        match: \b(support.function.git-rebase)\b
+  constant.sha.git-rebase:
+    patterns:
+      - name: constant.sha.git-rebase
+        match: \b(constant.sha.git-rebase)\b
+  variable.language:
+    patterns:
+      - name: variable.language
+        match: \b(variable.language)\b
+  token.info-token:
+    patterns:
+      - name: token.info-token
+        match: \b(token.info-token)\b
+  token.warn-token:
+    patterns:
+      - name: token.warn-token
+        match: \b(token.warn-token)\b
+  token.error-token:
+    patterns:
+      - name: token.error-token
+        match: \b(token.error-token)\b
+  token.debug-token:
+    patterns:
+      - name: token.debug-token
+        match: \b(token.debug-token)\b
+scopeName: source.fin

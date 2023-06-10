@@ -1,0 +1,25 @@
+{
+  "name": "my-swift-standards",
+  "displayName": "My Swift Standards",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.79.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "fin",
+      "aliases": ["Fin", "fin"],
+      "extensions": [".fin"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "fin",
+      "scopeName": "source.fin",
+      "path": "./syntaxes/fin.tmLanguage.json"
+    }]
+  }
+}
