@@ -2,4 +2,4 @@
 
 ## Features
 
-![highlight](https://github.com/hanz-taister/my-swift-standards/images/highlight.png)
+![highlight](https://raw.githubusercontent.com/hanz-taister/my-swift-standards/master/images/highlight.png)
