@@ -2,11 +2,11 @@
   "name": "my-swift-standards",
   "displayName": "My Swift Standards",
   "description": "",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "repository": "https://github.com/hanz-taister/my-swift-standards",
   "publisher": "Taister",
   "engines": {
-    "vscode": "^1.78.2"
+    "vscode": "^1.74.3"
   },
   "categories": [
     "Programming Languages"

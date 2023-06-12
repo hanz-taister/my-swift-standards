@@ -2,98 +2,61 @@
 $schema: https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json
 name: Fin
 patterns:
-  - include: '#basic-header-block'
-  - include: '#application-header-block'
-  - include: '#user-header-block'
-  - include: '#text-block'
-  - include: '#trailer-block'
+  - include: '#block-second'
+  - include: '#swift-session'
+  - include: '#swift-text'
   - include: '#theme-token-colors'
+  - include: '#swift-value'
 repository:
-  basic-header-block:
-    begin: '{1:'
-    end: '}'
-  application-header-block:
+  block-second:
     begin: '{2:'
     end: '}'
     patterns:
-      - include: '#output-message'
+      - match: 'O(\d{3})(\d{4})(\d{6})(\w{12})(\w{10})(\d{6})(\d{4})N'
+        captures: 
+          1: 
+            name: string.regexp.fin
+          4: 
+            name: markup.underline.fin
+          6: 
+            name: markup.underline.fin
+          7: 
+            name: markup.underline.fin
+      - match: 'I(\d{3})(\w{12})(.{2})(003|020)'
+        captures: 
+          1: 
+            name: string.regexp.fin
+          2: 
+            name: markup.underline.fin
+          include: '#output-message'
       - include: '#input-message'
-  user-header-block:
-    begin: '{3:'
-    end: '}'
-  text-block:
-    begin: '{4:'
-    end: '-}'
-    patterns:
-      - include: '#swift-session'
-      - include: '#swift-object'
-      - include: '#swift-variable'
-      - include: '#swift-constant'
-  trailer-block:
-    begin: '{5:'
-    end: '}'
-  output-message:
-    begin: 'O(\d{3})(\d{4})(\d{6})(\w{12})(\w{10})(\d{6})(\d{4})'
-    end: 'N'
-    beginCaptures:
-      1: 
-        name: string.regexp.fin
-      4: 
-        name: markup.underline.fin
-      6: 
-        name: markup.underline.fin
-      7: 
-        name: markup.underline.fin
-  input-message:
-    begin: 'I(\d{3})(\w{12})(.{2})'
-    end: '003|020'
-    beginCaptures:
-      1: 
-        name: string.regexp.fin
-      2: 
-        name: markup.underline.fin
   swift-session:
-    begin: '^(:)(16R|16S)(:)(\w+)'
-    end: '$'
-    beginCaptures:
+    match: '^:(16R|16S):(\w+)$'
+    name: string.regexp && markup.italic.fin
+  swift-text:
+    match: '^:(\w+)(:*)(.+)'
+    captures: 
       1: 
-        name: markup.italic.fin
-      2: 
-        name: markup.italic.fin
+        name: markup.heading.fin
       3: 
-        name: markup.italic.fin
-      4: 
-        name: markup.italic.fin
-  swift-constant:
-    begin: '^:(\w+):(.+)'
-    end: '$'
-    beginCaptures:
-      1: 
+        patterns:
+          - include: '#swift-field'
+          - include: '#swift-value'
+  swift-field:   
+    match: '(\w+)(//|/| )(.+)'
+    captures:
+      1:
         name: markup.heading.fin
-      2: 
-        name: markup.bold.fin
-  swift-variable:
-    begin: '^:(\w+)::(\w+)(//|/)(.+)'
-    end: '$'
-    beginCaptures:
-      1: 
-        name: markup.heading.fin
-      2: 
-        name: markup.bold.fin
-      4: 
-        name: string.value.fin
-  swift-object:
-    begin: '^:(\w+)::(\w+)(//|/)(\w+)/(.+)'
-    end: '$'
-    beginCaptures:
-      1: 
-        name: markup.heading.fin
-      2: 
-        name: markup.bold.fin
-      4: 
-        name: markup.bold.fin
-      5: 
-        name: string.value.fin
+      2:
+        name: invalid.fin
+      3:
+        patterns:
+          - include: '#swift-field'
+          - include: '#swift-value'
+  swift-value:   
+    match: '(?!{[12345]:).*'
+    name: string.fin
+        
 # ---------- ---------- ----------
   theme-token-colors:
     begin: '--- theme-token-colors start ---'
